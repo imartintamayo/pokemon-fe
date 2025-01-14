@@ -1,14 +1,18 @@
 import { listPokemonAdapter } from '@/adapters';
 import { useFetchAndLoad } from '@/hooks';
-import { pokemonList, pokemonSelect } from '@/redux/states/pokemon';
+import { pokemonList } from '@/redux/states/pokemonList';
 import { AppStore } from '@/redux/store';
 import { pokemonList as pokemonListFetch } from '@/services/public.service';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
+import PokemonSelect from './PokemonSelect';
+import PokemonCard from './PokemonCard';
+
 export const PokemonList = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
   const dispatch = useDispatch();
+  const pokemonListState = useSelector((store: AppStore) => store.pokemonList);
   const pokemonState = useSelector((store: AppStore) => store.pokemon);
 
   const handleClick = async () => {
@@ -16,10 +20,9 @@ export const PokemonList = () => {
     dispatch(pokemonList(listPokemonAdapter(pList)));
   };
 
-  const handleModify = () => {
-    dispatch(pokemonSelect({ name: 'Gentleman' }));
-  };
-
+  const isPokemonListEmpty = pokemonListState.length === 0;
+  const hasImg = pokemonState.image.length > 0;
+  
   return (
     <>
       {loading ? (
@@ -28,14 +31,15 @@ export const PokemonList = () => {
         </div>
       ) : (
         <>
-          <Button variant="text" onClick={handleClick}>
-            Fetch Pokemon List
-          </Button>
-          <Button variant="text" onClick={handleModify}>
-            MODIFY
-          </Button>
+          { isPokemonListEmpty && (
+              <Button variant="text" onClick={handleClick}>
+                FETCH POKEMON LIST
+              </Button>
+          )}
+          
           <div>
-            <h3>{JSON.stringify(pokemonState)}</h3>
+            { !isPokemonListEmpty && <PokemonSelect /> }
+            { hasImg && <PokemonCard /> } 
           </div>
         </>
       )}
