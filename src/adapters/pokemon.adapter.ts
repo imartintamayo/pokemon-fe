@@ -1,7 +1,7 @@
 export const getPokemonAdapter = (result: any) => ({
-  id: result.data.id,
-  name: result.data.name,
-  image: result.data.sprites.front_default
+  id: result.data.pokemonGet.id,
+  name: result.data.pokemonGet.name,
+  image: result.data.pokemonGet.image
 });
 
 export const listPokemonAdapter = (result: any) => {

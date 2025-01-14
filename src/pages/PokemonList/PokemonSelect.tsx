@@ -1,14 +1,13 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import CustomSelect from '@/components/Select';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Pokemon, SelectOption } from '@/models';
 import { pokemonSelect } from '@/redux/states/pokemon';
-import { pokemonList } from '@/redux/states/pokemonList';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStore } from '@/redux/store';
 import { pokemonGet } from '@/services/public.service';
 import { getPokemonAdapter } from '@/adapters';
-import { useFetchAndLoad } from '@/hooks';
+import { useFetchAndLoadGqlQuery } from '@/hooks';
 
 type FormValues = {
   name: string;
@@ -17,7 +16,7 @@ type FormValues = {
 export const PokemonSelect = () => {
   const pokemonListState = useSelector((store: AppStore) => store.pokemonList);
   const dispatch = useDispatch();
-  const { loading, callEndpoint } = useFetchAndLoad();
+  const { loading, callEndpoint } = useFetchAndLoadGqlQuery();
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm<FormValues>({
     defaultValues: { name: pokemonListState[0].name },
