@@ -1,6 +1,7 @@
 import { Pokemon } from '@/models';
-import { loadAbort } from '@/utilities';
+import client, { loadAbort } from '@/utilities';
 import axios from 'axios';
+import { gql } from '@apollo/client';
 
 export const pokemonList = () => {
   const controller = loadAbort();
@@ -11,11 +12,29 @@ export const pokemonList = () => {
   };
 };
 
+export const POKEMON_GET = gql`
+  query pokemonGet($nameOrId: String!) {
+    pokemonGet(nameOrId: $nameOrId) {
+      id
+      name
+      image
+    }
+  }
+`;
+
 export const pokemonGet = (nameOrId: string) => {
-  const controller = loadAbort();
+  const controller = new AbortController();
 
   return {
-    call: axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${nameOrId}`, { signal: controller.signal }),
+    call: client.query({
+      query: POKEMON_GET,
+      variables: { nameOrId },
+      context: {
+        fetchOptions: {
+          signal: controller.signal
+        }
+      }
+    }),
     controller
   };
 };
