@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userSlice } from './states/user';
+import { pokemonSlice } from './states/pokemon';
 
 export interface AppStore {
-  user: any;
+  pokemon: any;
 }
 
 export default configureStore<AppStore>({
   reducer: {
-    user: userSlice.reducer
+    pokemon: pokemonSlice.reducer
   }
 });

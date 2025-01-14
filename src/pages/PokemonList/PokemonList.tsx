@@ -1,21 +1,23 @@
-import { createUserAdapter } from '@/adapters';
+import { listPokemonAdapter } from '@/adapters';
 import { useFetchAndLoad } from '@/hooks';
-import { createUser, modifyUser } from '@/redux/states/user';
+import { pokemonList, pokemonSelect } from '@/redux/states/pokemon';
 import { AppStore } from '@/redux/store';
-import { login } from '@/services/public.service';
+import { pokemonList as pokemonListFetch } from '@/services/public.service';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const Login = () => {
+export const PokemonList = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
   const dispatch = useDispatch();
-  const userState = useSelector((store: AppStore) => store.user);
+  const pokemonState = useSelector((store: AppStore) => store.pokemon);
+
   const handleClick = async () => {
-    const morty = await callEndpoint(login());
-    dispatch(createUser(createUserAdapter(morty)));
+    const pList = await callEndpoint(pokemonListFetch());
+    dispatch(pokemonList(listPokemonAdapter(pList)));
   };
+
   const handleModify = () => {
-    dispatch(modifyUser({ name: 'Gentleman' }));
+    dispatch(pokemonSelect({ name: 'Gentleman' }));
   };
 
   return (
@@ -27,13 +29,13 @@ export const Login = () => {
       ) : (
         <>
           <Button variant="text" onClick={handleClick}>
-            LOGIN
+            Fetch Pokemon List
           </Button>
           <Button variant="text" onClick={handleModify}>
             MODIFY
           </Button>
           <div>
-            <h3>{JSON.stringify(userState)}</h3>
+            <h3>{JSON.stringify(pokemonState)}</h3>
           </div>
         </>
       )}
@@ -41,4 +43,4 @@ export const Login = () => {
   );
 };
 
-export default Login;
+export default PokemonList;
