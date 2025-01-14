@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export const RouteGuard = () => {
-  const userState = useSelector((state: AppStore) => state.user);
-  return userState.name ? <Outlet /> : <Navigate replace to={`login`} />;
+  const pokemonState = useSelector((state: AppStore) => state.pokemon);
+  return pokemonState.name ? <Outlet /> : <Navigate replace to={`pokemon`} />;
 };
 
 export default RouteGuard;

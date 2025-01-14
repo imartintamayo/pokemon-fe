@@ -1,29 +1,21 @@
-import { User } from '@/models';
+import { Pokemon } from '@/models';
 import { loadAbort } from '@/utilities';
 import axios from 'axios';
 
-export const login = () => {
+export const pokemonList = () => {
   const controller = loadAbort();
+
   return {
-    call: axios.get<User>('https://rickandmortyapi.com/api/character/2', { signal: controller.signal }),
+    call: axios.get<Pokemon>('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0', { signal: controller.signal }),
     controller
   };
 };
 
-export const getMorty = () => {
-  return axios.get<User>('https://rickandmortyapi.com/api/character/2');
-};
-
-export const getRick = () => {
-  return axios.get<User>('https://rickandmortyapi.com/api/character/1');
-};
-
-export const getCoolMorty = () => {
+export const pokemonGet = (nameOrId: string) => {
   const controller = loadAbort();
-  return { call: axios.get<User>('https://rickandmortyapi.com/api/character/2', { signal: controller.signal }), controller };
-};
 
-export const getCoolRick = () => {
-  const controller = loadAbort();
-  return { call: axios.get<User>('https://rickandmortyapi.com/api/character/1', { signal: controller.signal }), controller };
+  return {
+    call: axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${nameOrId}`, { signal: controller.signal }),
+    controller
+  };
 };
