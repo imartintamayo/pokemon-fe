@@ -1,1 +1,1 @@
-export * from './user.adapter';
+export * from './pokemon.adapter';

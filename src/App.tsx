@@ -3,15 +3,14 @@ import { ThemeProvider } from '@emotion/react';
 import { SnackbarProvider } from 'notistack';
 import React, { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { AppContainer } from './styled-components';
 import theme from './theme';
 import { SnackbarUtilsConfigurator } from './utilities';
 
 // Routes
-const DashboardSuperFix = lazy(() => import('@/pages/Dashboard/DashboardSuperFix'));
-const Login = lazy(() => import('@/pages/Login/Login'));
+const PokemonList = lazy(() => import('@/pages/PokemonList/PokemonList'));
 
 const App = () => {
   return (
@@ -24,8 +23,7 @@ const App = () => {
               <Provider store={store}>
                 <BrowserRouter>
                   <Routes>
-                    <Route path="/" element={<Login />} />
-                    <Route path={`dashboard/*`} element={<DashboardSuperFix />} />
+                    <Route path="/" element={<PokemonList />} />
                   </Routes>
                 </BrowserRouter>
               </Provider>
