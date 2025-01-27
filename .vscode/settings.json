@@ -1,0 +1,59 @@
+{
+    // Habilitar el formateo automático al guardar
+    "editor.formatOnSave": true,
+  
+    // Organizar importaciones automáticamente al guardar
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.fixAll": true
+    },
+  
+    // Ajustes del formato (Prettier, ESLint, etc.)
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5",
+    "prettier.tabWidth": 2,
+    "prettier.semi": true,
+    "prettier.printWidth": 80,
+  
+    // Integración con ESLint
+    "eslint.validate": ["javascript", "typescript"],
+    "eslint.format.enable": true,
+    "eslint.packageManager": "pnpm",
+    "eslint.codeActionsOnSave.mode": "all",
+  
+    // Espacios en lugar de tabulaciones
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+  
+    // Eliminar espacios finales automáticamente
+    "files.trimTrailingWhitespace": true,
+  
+    // Insertar una nueva línea al final del archivo automáticamente
+    "files.insertFinalNewline": true,
+  
+    // Recortar espacios en blanco al guardar
+    "files.trimFinalNewlines": true,
+  
+    // Configuración de TypeScript
+    "typescript.format.insertSpaceAfterConstructor": true,
+    "typescript.format.insertSpaceAfterCommaDelimiter": true,
+    "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  
+    // Líneas largas de código
+    "editor.wordWrap": "on",
+    "editor.rulers": [80, 120],
+  
+    // Mejorar la experiencia con archivos grandes
+    "files.autoGuessEncoding": true,
+    "files.maxMemoryForLargeFilesMB": 4096,
+  
+    // Mejoras de exploración de proyectos
+    "explorer.compactFolders": false,
+    "explorer.openEditors.visible": 0,
+  
+    // Mejoras de terminal
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.cursorStyle": "line"
+  }
+  
